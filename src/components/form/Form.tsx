@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+//import React, { useState } from "react";
+import React from "react";
 import styles from "./Form.module.css";
 import { Formik } from "formik";
 import validationSchema from "../../services/validationSchema";
@@ -11,8 +12,8 @@ interface IForm {
 }
 
 const Form: React.FC<IForm> = ({ firebaseFunc, buttonName }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
 
   return (
     <>
