@@ -15,7 +15,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter basename="">
+      <BrowserRouter basename="market">
         <ThemeProvider
           breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
           minBreakpoint="xxs"
