@@ -1,0 +1,10 @@
+.shop__container {
+  padding: 20px 30px;
+}
+
+.list__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 18px;
+  gap: 18px;
+}

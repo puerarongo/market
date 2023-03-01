@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./Registration.module.css";
-import Form from "../form/Form";
+import FormAuth from "../form/Form";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Registration: React.FC = () => {
   return (
     <div className={styles.container}>
-      <h2>Registration</h2>
-      <Form
+      <h2 className={styles.title}>Registration</h2>
+      <FormAuth
         firebaseFunc={createUserWithEmailAndPassword}
         buttonName={"Sign Up"}
       />

@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  align-items: center;
+  background-color: #004f44;
+  color: #ffffff;
+  padding: 30px 100px;
+}
+
+.nav__container {
+  margin-right: auto;
+}
+
+.nav__confirm {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.link {
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.link:not(:last-child) {
+  margin-right: 40px;
+}
+
+.link:hover {
+  color: #e7e7e7;
+}
+
+.svg {
+  display: block;
+  width: 30px;
+  height: 30px;
+  fill: #ffffff;
+}

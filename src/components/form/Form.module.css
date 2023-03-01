@@ -1,0 +1,31 @@
+.container {
+  display: block;
+  padding: 20px 30px;
+}
+
+.form {
+  width: 600px;
+  margin: auto;
+}
+
+.label {
+  display: block;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 16px;
+  color: rgb(49, 39, 39);
+}
+
+.input {
+  margin-top: 5px;
+}
+
+.label:not(:last-child) {
+  margin-bottom: 40px;
+}
+
+.button {
+  display: block;
+  margin: auto;
+}

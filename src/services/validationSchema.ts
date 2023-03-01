@@ -5,7 +5,7 @@ const validationSchema = yup.object().shape({
     .string()
     .typeError("Will be a string")
     .email("the field contains an error")
-    .matches(/^(?!\-)\S{2,}@\S+(\.\w{2,})(?!\-)$/, "Is not in correct format")
+    .matches(/^(?!-)\S{2,}@\S+(\.\w{2,})(?!-)$/, "Is not in correct format")
     .min(10, "the field contains an error")
     .max(63, "the field contains an error")
     .required("this field is required"),
@@ -15,7 +15,7 @@ const validationSchema = yup.object().shape({
     .min(5, "the field contains an error")
     .max(30, "the field contains an error")
     .matches(
-      /^(?!\-|\.)[0-9a-zA-Z\*\!\@\#\$\%\^\&\(\)\{\}\[\]\:\;\<\>,\.\?\/\~_\+\-\=\|\\]{5,30}$/,
+      /^(?!-|\.)[0-9a-zA-Z*!@#$%^&(){}[\]:;<>,.?/~_+\-=|\\]{5,30}$/,
       "the field contains an error"
     )
     .required("this field is required"),

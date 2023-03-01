@@ -1,0 +1,11 @@
+.detail__link {
+  margin-left: 5px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.detail__link:hover {
+  color: #ffffff;
+}
