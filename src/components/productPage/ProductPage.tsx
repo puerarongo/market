@@ -2,23 +2,28 @@ import React, { useState, useEffect } from "react";
 import styles from "./ProductPage.module.css";
 import { Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { getDetailData } from "../../services/apiData";
+import { getData } from "../../redux/operation/data-operation";
+//import { getDetailData } from "../../services/apiData";
+import { useSelector, useDispatch } from "react-redux";
 
 const ProductPage: React.FC = () => {
   const [detail, setDetail] = useState<any>("");
+  const dispatch = useDispatch();
+  const page = useSelector((state: any) => state.data);
   const id: String | undefined = useParams().productId;
 
   useEffect(() => {
-    getDetailData(id)
-      .then((response) => {
-        if (response.status === 404) {
-          throw new Error("This movie is not in the database");
-        }
-        console.log("PAGE", response.data);
-        setDetail(response.data);
-      })
-      .catch((error) => setDetail(error));
-  }, [id]);
+    dispatch(getData());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (page.results) {
+      const data = page.results.find((el: any) => {
+        return el.id === Number(id);
+      });
+      setDetail(data);
+    }
+  }, [page.results, id]);
 
   return (
     <>
@@ -27,7 +32,7 @@ const ProductPage: React.FC = () => {
           <div className={styles.img__container}>
             <img
               className={styles.image}
-              src={`https://image.tmdb.org/t/p/w300${detail.poster_path}`}
+              src={`https://image.tmdb.org/t/p/w500${detail.poster_path}`}
               alt={`${detail.id}`}
             />
           </div>
