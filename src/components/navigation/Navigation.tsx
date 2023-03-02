@@ -4,8 +4,31 @@ import { NavLink } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import svgPath from "../../services/svgPath";
 
+// * auth
+import useAuth from "../guard/useAuth";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
+import { useNavigate } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
+import { userActions } from "../../redux/slices/userSlice";
+
 const Navigation: React.FC = () => {
-  const isLoggedIn = true;
+  const dispatch = useDispatch();
+  // const isLoggedIn = false;
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  console.log("navigation useAyth", user);
+
+  const logOut = () => {
+    signOut(auth)
+      .then((data) => {
+        navigate("/");
+        console.log(data, "out");
+      })
+      .catch((error: Error) => console.log(error));
+    dispatch(userActions.userAdd(null));
+  };
 
   return (
     <header className={styles.header}>
@@ -17,7 +40,7 @@ const Navigation: React.FC = () => {
       <div className={styles.logo__container}>
         <p>Logo</p>
       </div>
-      {isLoggedIn ? (
+      {user ? (
         <div className={styles.nav__confirm}>
           <NavLink to="/personal" className={styles.link}>
             <svg className={styles.svg}>
@@ -29,7 +52,12 @@ const Navigation: React.FC = () => {
               <use href={svgPath.basket + "#basket"}></use>
             </svg>
           </NavLink>
-          <Button className={styles.button} variant="light" type="button">
+          <Button
+            className={styles.button}
+            variant="light"
+            type="button"
+            onClick={logOut}
+          >
             Log out
           </Button>
         </div>

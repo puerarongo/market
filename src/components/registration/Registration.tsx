@@ -10,6 +10,7 @@ const Registration: React.FC = () => {
       <FormAuth
         firebaseFunc={createUserWithEmailAndPassword}
         buttonName={"Sign Up"}
+        formType={"registration"}
       />
     </div>
   );

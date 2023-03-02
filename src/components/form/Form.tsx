@@ -9,14 +9,30 @@ import { UserCredential } from "firebase/auth";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 
+// * TEST
+import { setDoc, doc } from "firebase/firestore";
+import { db } from "../firebase";
+
+import { useNavigate } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
+import { userActions } from "../../redux/slices/userSlice";
+
 interface IFormAuth {
   firebaseFunc: Function;
   buttonName: String;
+  formType: String;
 }
 
-const FormAuth: React.FC<IFormAuth> = ({ firebaseFunc, buttonName }) => {
+const FormAuth: React.FC<IFormAuth> = ({
+  firebaseFunc,
+  buttonName,
+  formType,
+}) => {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return (
     <div className={styles.container}>
@@ -28,13 +44,26 @@ const FormAuth: React.FC<IFormAuth> = ({ firebaseFunc, buttonName }) => {
         validationSchema={validationSchema}
         onSubmit={(values) => {
           const { email, password } = values;
-          console.log(email);
-          console.log(password);
           firebaseFunc(auth, email, password)
-            .then((useCredential: Promise<UserCredential>) =>
-              console.log(useCredential)
-            )
-            .catch((err: Promise<UserCredential>) => console.log(err));
+            .then(async (useCredential: UserCredential) => {
+              console.log(`${firebaseFunc}`, useCredential);
+
+              if (formType === "registration") {
+                const { user } = useCredential;
+                await setDoc(doc(db, "users", user.uid), {
+                  uid: user.uid,
+                  email,
+                });
+                navigate("/personal");
+              } else {
+                navigate("/personal");
+              }
+              console.log("form", useCredential.user.uid);
+              dispatch(userActions.userAdd(useCredential.user.uid));
+            })
+            .catch((error: Error) => console.log(error.message));
+          values.email = "";
+          values.password = "";
         }}
       >
         {({

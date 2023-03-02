@@ -10,6 +10,7 @@ const Login: React.FC = () => {
       <FormAuth
         firebaseFunc={signInWithEmailAndPassword}
         buttonName={"Sign In"}
+        formType={"login"}
       />
     </div>
   );

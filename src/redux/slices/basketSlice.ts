@@ -48,11 +48,14 @@ const basketSlice = createSlice({
     },
 
     deleteProduct: (state, action) => {
-      const id = action.payload;
-      const existingProduct = state.basketItems.find((el: any) => el.id === id);
+      const id = action.payload.id;
+      const existingProduct = state.basketItems.find((el: any) => {
+        return el.id === id;
+      });
 
       if (existingProduct) {
-        state.basketItems = state.basketItem.filter((el: any) => el.id !== id);
+        console.log("existing into", state.basketItems);
+        state.basketItems = state.basketItems.filter((el: any) => el.id !== id);
         state.totalQuantity = state.totalQuantity - existingProduct.quantity;
       }
 
