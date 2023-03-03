@@ -1,3 +1,37 @@
 .container {
   display: flex;
+  padding: 40px 50px;
+}
+
+.image {
+  border-radius: 4px;
+  max-width: 400px;
+  max-height: 600;
+  margin-right: 30px;
+}
+
+.description__container {
+  padding: 20px;
+  color: rgb(49, 39, 39);
+}
+
+.title {
+  justify-content: center;
+  display: flex;
+  padding: 20px 30px;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: 18px;
+  font-weight: normal;
+  margin-bottom: 15px;
+}
+
+.price {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 15px;
 }

@@ -39,7 +39,7 @@ const ProductPage: React.FC = () => {
           <div className={styles.description__container}>
             <h2 className={styles.title}>{detail.title}</h2>
             <p className={styles.description}>{detail.overview}</p>
-            <p className={styles.price}>$ {detail.vote_count}</p>
+            <p className={styles.price}>Price: $ {detail.vote_count}</p>
             <Button variant="success" type="button">
               Add to basket
             </Button>

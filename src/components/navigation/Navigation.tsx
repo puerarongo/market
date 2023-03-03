@@ -5,28 +5,22 @@ import { Button } from "react-bootstrap";
 import svgPath from "../../services/svgPath";
 
 // * auth
-import useAuth from "../guard/useAuth";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
-
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../redux/slices/userSlice";
 
 const Navigation: React.FC = () => {
-  const dispatch = useDispatch();
-  // const isLoggedIn = false;
   const navigate = useNavigate();
-  const { user } = useAuth();
-  console.log("navigation useAyth", user);
+  const dispatch = useDispatch();
+  const user = useSelector((state: any) => state.user.user);
+  console.log("navigate", user);
 
   const logOut = () => {
     signOut(auth)
-      .then((data) => {
-        navigate("/");
-        console.log(data, "out");
-      })
-      .catch((error: Error) => console.log(error));
+      .then(() => navigate("/"))
+      .catch((error: Error) => console.log(error.message));
     dispatch(userActions.userAdd(null));
   };
 

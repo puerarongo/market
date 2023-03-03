@@ -11,20 +11,16 @@ import Login from "./login/Login";
 import Personal from "./personal/Personal";
 import Basket from "./basket/Basket";
 import NotFound from "./notFound/NotFound";
-import Private from "./guard/Private";
-import Public from "./guard/Public";
-
-import useAuth from "./guard/useAuth";
+import Private from "./hooks/Private";
+import Public from "./hooks/Publuc";
 
 const App: React.FC = () => {
-  useAuth();
   return (
     <>
       <Routes>
         <Route path="/" element={<AppBar />}>
           <Route index element={<Shop />} />
           <Route path="/:productId" element={<ProductPage />} />
-
           <Route element={<Private />}>
             <Route path="/personal" element={<Personal />} />
             <Route path="/basket" element={<Basket />} />

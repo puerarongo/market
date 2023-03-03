@@ -43,14 +43,23 @@ const ShopItem: React.FC<IShopItem> = ({
         alt={`${id}`}
       />
       <div className={styles.detail}>
-        <h3 className="title">{title}</h3>
-        <p className={styles.price}>{`${price}`} $</p>
-        <Button type="button">
-          <Link to={`${id}`} className={styles.detail__link}>Detail</Link>
-        </Button>
-        <Button variant="success" type="button" onClick={addToBasket}>
-          Add
-        </Button>
+        <h3 className={styles.title}>{title}</h3>
+        <p className={styles.price}>{`Price: $ ${price}`}</p>
+        <div className={styles.media}>
+          <Button type="button" className={styles.detal__button}>
+            <Link to={`${id}`} className={styles.detail__link}>
+              Detail
+            </Link>
+          </Button>
+          <Button
+            variant="success"
+            className={styles.add__button}
+            type="button"
+            onClick={addToBasket}
+          >
+            Add
+          </Button>
+        </div>
       </div>
     </div>
   );
