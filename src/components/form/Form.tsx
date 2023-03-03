@@ -6,6 +6,7 @@ import { auth } from "../firebase";
 import { UserCredential } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import GoogleButton from "./googleButton/GoogleButton";
+import { Link } from "react-router-dom";
 
 // * Bootstrap
 import Form from "react-bootstrap/Form";
@@ -131,8 +132,23 @@ const FormAuth: React.FC<IFormAuth> = ({
             <Button type="submit" size="lg" className={styles.button}>
               {buttonName}
             </Button>
-            {formType === "login" && (
-              <GoogleButton googleFunction={googleHandler} />
+            {formType === "login" ? (
+              <>
+                <p className={styles.auth__text}>
+                  Don't have an account yet?
+                  <Link to="/registration" className={styles.auth__link}>
+                    Register
+                  </Link>
+                </p>
+                <GoogleButton googleFunction={googleHandler} />
+              </>
+            ) : (
+              <p className={styles.auth__text}>
+                Are you already registered?
+                <Link to="/login" className={styles.auth__link}>
+                  Return to login
+                </Link>
+              </p>
             )}
           </Form>
         )}

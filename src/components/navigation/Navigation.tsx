@@ -32,7 +32,9 @@ const Navigation: React.FC = () => {
         </NavLink>
       </div>
       <div className={styles.logo__container}>
-        <p>Logo</p>
+        <svg className={styles.svg__logo}>
+          <use href={svgPath.logo + "#logo"}></use>
+        </svg>
       </div>
       {user ? (
         <div className={styles.nav__confirm}>
@@ -57,9 +59,6 @@ const Navigation: React.FC = () => {
         </div>
       ) : (
         <div className={styles.nav__confirm}>
-          <NavLink to="/registration" className={styles.link}>
-            Registration
-          </NavLink>
           <NavLink to="/login" className={styles.link}>
             Login
           </NavLink>

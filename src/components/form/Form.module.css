@@ -29,3 +29,23 @@
   display: block;
   margin: auto;
 }
+
+.auth__text,
+.auth__link {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 12px;
+  margin: 25px 0 15px;
+  color: rgb(49, 39, 39);
+}
+
+.auth__link {
+  text-decoration: none;
+  margin-left: 3px;
+  color: rgb(3, 142, 206);
+}
+
+.auth__link:hover {
+  color: rgb(3, 111, 161);
+}
