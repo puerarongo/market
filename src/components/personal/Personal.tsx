@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Personal.module.css";
 import useAuth from "../hooks/useAuth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 const Personal: React.FC = () => {
