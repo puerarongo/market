@@ -4,17 +4,19 @@ import { Formik } from "formik";
 import validationSchema from "../../services/validationSchema";
 import { auth } from "../firebase";
 import { UserCredential } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import GoogleButton from "./googleButton/GoogleButton";
 
 // * Bootstrap
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 
-// * TEST
+// * Firebase
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { userActions } from "../../redux/slices/userSlice";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 interface IFormAuth {
   firebaseFunc: Function;
@@ -30,6 +32,20 @@ const FormAuth: React.FC<IFormAuth> = ({
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const googleHandler = () => {
+    const googleProvider = new GoogleAuthProvider();
+    return signInWithPopup(auth, googleProvider).then(
+      async (userCredential: UserCredential) => {
+        const { user } = userCredential;
+        await setDoc(doc(db, "users", user.uid), {
+          uid: user.uid,
+          email: user.email,
+        });
+        dispatch(userActions.userAdd(user.uid));
+      }
+    );
+  };
+
   return (
     <div className={styles.container}>
       <Formik
@@ -41,16 +57,16 @@ const FormAuth: React.FC<IFormAuth> = ({
         onSubmit={(values) => {
           const { email, password } = values;
           firebaseFunc(auth, email, password)
-            .then(async (useCredential: UserCredential) => {
+            .then(async (userCredential: UserCredential) => {
               if (formType === "registration") {
-                const { user } = useCredential;
+                const { user } = userCredential;
                 await setDoc(doc(db, "users", user.uid), {
                   uid: user.uid,
                   email,
                 });
               }
-              await navigate("/personal");
-              dispatch(userActions.userAdd(useCredential.user.uid));
+              navigate("/personal");
+              dispatch(userActions.userAdd(userCredential.user.uid));
             })
             .catch((error: Error) => console.log(error.message));
           values.email = "";
@@ -115,6 +131,9 @@ const FormAuth: React.FC<IFormAuth> = ({
             <Button type="submit" size="lg" className={styles.button}>
               {buttonName}
             </Button>
+            {formType === "login" && (
+              <GoogleButton googleFunction={googleHandler} />
+            )}
           </Form>
         )}
       </Formik>

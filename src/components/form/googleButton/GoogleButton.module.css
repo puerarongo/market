@@ -1,0 +1,42 @@
+.hr {
+  margin-top: 15px;
+  text-align: center;
+  height: 1px;
+  width: 600px;
+  background-color: rgb(49, 39, 39, 50%);
+}
+
+.google__text {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 12px;
+  margin: 15px 0;
+  color: rgb(49, 39, 39);
+}
+
+.button__google {
+  width: 350px;
+  display: flex;
+  background-color: #5383ec;
+  border: 1px solid #5383ec;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.svg__container {
+  padding: 18px;
+  background-color: #fff;
+}
+
+.svg__google {
+  width: 18px;
+  height: 18px;
+}
+
+.text__google {
+  text-align: center;
+  margin: 0 auto;
+  padding: 15px 0;
+  color: #fff;
+}
