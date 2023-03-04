@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "./ShopItem.module.css";
 import { Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { basketActions } from "../../../redux/slices/basketSlice";
 import { Link } from "react-router-dom";
+import { Notify } from "notiflix/build/notiflix-notify-aio";
 
 interface IShopItem {
   id: Number;
@@ -21,18 +22,24 @@ const ShopItem: React.FC<IShopItem> = ({
   price,
 }) => {
   const dispatch = useDispatch();
+  const user = useSelector((state: any) => state.user.user);
 
   const addToBasket = () => {
-    dispatch(
-      basketActions.addProduct({
-        id: id,
-        image: image,
-        title: title,
-        overview: overview,
-        price: price,
-      })
-    );
-    console.log("PRODUCT ADDED IN BASKET!");
+    if (user) {
+      dispatch(
+        basketActions.addProduct({
+          id: id,
+          image: image,
+          title: title,
+          overview: overview,
+          price: price,
+        })
+      );
+      // Notify.success("Product added successfully");
+    } else
+      Notify.failure(
+        "You must be logged in to your profile to add a product to your shopping cart."
+      );
   };
 
   return (

@@ -11,9 +11,9 @@ const useAuth = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch(userActions.userAdd(user.uid));
+        dispatch(userActions.userAdd({user: user.uid, email: user.email}));
       } else {
-        dispatch(userActions.userAdd(null));
+        dispatch(userActions.userAdd({user: null, email: null}));
       }
     });
   });

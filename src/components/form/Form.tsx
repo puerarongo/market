@@ -13,11 +13,12 @@ import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 
 // * Firebase
-import { setDoc, doc } from "firebase/firestore";
+import { getDoc, setDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { userActions } from "../../redux/slices/userSlice";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { personalActions } from "../../redux/slices/personalSlice";
 
 interface IFormAuth {
   firebaseFunc: Function;
@@ -38,11 +39,31 @@ const FormAuth: React.FC<IFormAuth> = ({
     return signInWithPopup(auth, googleProvider).then(
       async (userCredential: UserCredential) => {
         const { user } = userCredential;
-        await setDoc(doc(db, "users", user.uid), {
-          uid: user.uid,
-          email: user.email,
-        });
-        dispatch(userActions.userAdd(user.uid));
+
+        await getDoc(doc(db, "users", user.uid))
+          .then(async (data) => {
+            await setDoc(
+              doc(db, "users", user.uid),
+              {
+                uid: user.uid,
+                email: user.email,
+              },
+              { merge: true }
+            );
+            const { allProducts, allQuantity, allAmount }: any = data.data();
+            if (allProducts) {
+              dispatch(
+                personalActions.addBuy({
+                  allProducts,
+                  allQuantity,
+                  allAmount,
+                })
+              );
+            }
+          })
+          .catch((err: Error) => console.log(err));
+
+        dispatch(userActions.userAdd({ user: user.uid, email: user.email }));
       }
     );
   };
@@ -64,10 +85,20 @@ const FormAuth: React.FC<IFormAuth> = ({
                 await setDoc(doc(db, "users", user.uid), {
                   uid: user.uid,
                   email,
+                  personal: {
+                    allProducts: [],
+                    allAmount: 0,
+                    allQuantity: 0,
+                  },
                 });
               }
               navigate("/personal");
-              dispatch(userActions.userAdd(userCredential.user.uid));
+              dispatch(
+                userActions.userAdd({
+                  user: userCredential.user.uid,
+                  email: userCredential.user.email,
+                })
+              );
             })
             .catch((error: Error) => console.log(error.message));
           values.email = "";

@@ -10,6 +10,7 @@ import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../redux/slices/userSlice";
+import { personalActions } from "../../redux/slices/personalSlice";
 
 const Navigation: React.FC = () => {
   const navigate = useNavigate();
@@ -21,7 +22,8 @@ const Navigation: React.FC = () => {
     signOut(auth)
       .then(() => navigate("/"))
       .catch((error: Error) => console.log(error.message));
-    dispatch(userActions.userAdd(null));
+    dispatch(userActions.userAdd({ user: null, email: null }));
+    dispatch(personalActions.allDelete());
   };
 
   return (

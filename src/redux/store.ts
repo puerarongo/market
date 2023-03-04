@@ -13,6 +13,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import basketSlice from "./slices/basketSlice";
 import userSlice from "./slices/userSlice";
+import personalSlice from "./slices/personalSlice";
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -38,6 +39,7 @@ export const store = configureStore({
   reducer: {
     data: dataReducer,
     basket: basketSlice,
+    personal: personalSlice,
     user: persistReducer(userPersistConfig, userSlice),
   },
   middleware: middleware,

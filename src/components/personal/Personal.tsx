@@ -28,6 +28,7 @@ const Personal: React.FC = () => {
       })
       .catch((err: Error) => console.log(err));
   }, [user]);
+
   return (
     <div className={styles.container}>
       {data ? (

@@ -63,6 +63,8 @@ const basketSlice = createSlice({
         return total + Number(item.price) * Number(item.quantity);
       }, 0);
     },
+
+    allDelete: () => initialState,
   },
 });
 
