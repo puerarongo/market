@@ -32,7 +32,7 @@ const middleware = [
 const userPersistConfig = {
   key: "rootUser",
   storage,
-  whitelist: ["user"],
+  whitelist: ["user", "email"],
 };
 
 export const store = configureStore({

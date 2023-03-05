@@ -34,7 +34,7 @@ const FormAuth: React.FC<IFormAuth> = ({
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const googleHandler = () => {
+  const googleHandler = async () => {
     const googleProvider = new GoogleAuthProvider();
     return signInWithPopup(auth, googleProvider).then(
       async (userCredential: UserCredential) => {
@@ -51,6 +51,7 @@ const FormAuth: React.FC<IFormAuth> = ({
               { merge: true }
             );
             const { allProducts, allQuantity, allAmount }: any = data.data();
+
             if (allProducts) {
               dispatch(
                 personalActions.addBuy({
@@ -62,7 +63,6 @@ const FormAuth: React.FC<IFormAuth> = ({
             }
           })
           .catch((err: Error) => console.log(err));
-
         dispatch(userActions.userAdd({ user: user.uid, email: user.email }));
       }
     );

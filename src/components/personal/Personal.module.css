@@ -1,0 +1,50 @@
+.container {
+  display: block;
+  padding: 30px;
+}
+
+.personal__title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 22px;
+  color: rgb(49, 39, 39);
+  margin-top: 50px;
+  margin-bottom: 60px;
+}
+
+.personal__total {
+  display: flex;
+  height: 100px;
+  padding: 6px 8px;
+  align-items: center;
+}
+
+.personal__item {
+  margin-bottom: 20px;
+}
+
+.total__quantity,
+.total__amount {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 18px;
+  color: rgb(49, 39, 39);
+}
+
+.total__quantity {
+  margin-right: auto;
+}
+
+.total__amount {
+  margin: 0 auto;
+}
+
+.personal__empty {
+  text-align: center;
+  margin: 140px 0;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 18px;
+  color: rgb(49, 39, 39);
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getDoc, doc } from "firebase/firestore";
@@ -11,13 +11,12 @@ const Private: any = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("!!!!");
     if (!ready && user) {
       getDoc(doc(db, "users", user))
         .then((data) => {
           const { allProducts, allQuantity, allAmount }: any = data.data();
-          console.log("allProducts1111: ", allProducts);
           if (allProducts) {
-            console.log("allProducts: ", allProducts);
             dispatch(
               personalActions.addBuy({
                 allProducts,

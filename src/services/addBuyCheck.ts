@@ -2,7 +2,6 @@ import { store } from "../redux/store";
 
 const addBuyCheck = (productItems: any) => {
   const state = store.getState().personal;
-  console.log("state: ", store.getState());
   const objProducts = [...state.allProducts];
   productItems.forEach((el: any) => {
     const exitingProducts = state.allProducts.findIndex(
@@ -25,7 +24,6 @@ const addBuyCheck = (productItems: any) => {
         totalPrice: el.totalPrice,
       });
   });
-  console.log("????!??", objProducts);
   return objProducts;
 };
 

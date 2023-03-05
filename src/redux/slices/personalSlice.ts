@@ -11,7 +11,6 @@ const personalSlice = createSlice({
   initialState,
   reducers: {
     addBuy: (state, action) => {
-      console.log("addBuy", action.payload);
       const { allQuantity, allAmount, allProducts } = action.payload;
       state.allQuantity = state.allQuantity + allQuantity;
       state.allAmount = state.allAmount + allAmount;

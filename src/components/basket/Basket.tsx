@@ -1,58 +1,39 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./Basket.module.css";
 import BasketItem from "./baksetItem/BasketItem";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
 import { basketActions } from "../../redux/slices/basketSlice";
 import { personalActions } from "../../redux/slices/personalSlice";
-import { setDoc, updateDoc, doc, increment } from "firebase/firestore";
+import { updateDoc, doc, increment } from "firebase/firestore";
 import { db } from "../firebase";
 import addBuyCheck from "../../services/addBuyCheck";
 
 const Basket: React.FC = () => {
   const dispatch = useDispatch();
   const items = useSelector((state: any) => state.basket);
-  const personal = useSelector((state: any) => state.personal);
+  // const personal = useSelector((state: any) => state.personal);
   const user = useSelector((state: any) => state.user);
-
-  //useEffect(() => {
-  //  console.log("useEffect personal", personal.allProducts);
-  //  try {
-  //    setDoc(
-  //      doc(db, "users", user.user),
-  //      {
-  //        allProducts: personal.allProducts,
-  //        allAmount: personal.allAmount,
-  //        allQuantity: personal.allQuantity,
-  //      },
-  //      { merge: true }
-  //    );
-  //  } catch (err: any) {
-  //    console.log(err);
-  //  }
-  //  console.log("!");
-  //}, [personal, user]);
 
   const someFunction = () => {
     try {
       const { basketItems, totalAmount, totalQuantity } = items;
-      console.log("BASKET", basketItems);
       const newItems = {
         allProducts: addBuyCheck(basketItems),
         allAmount: totalAmount,
         allQuantity: totalQuantity,
       };
-      console.log("mewItems", newItems);
-
       dispatch(basketActions.allDelete());
       dispatch(personalActions.addBuy(newItems));
+
+      const { allProducts, allAmount, allQuantity } = newItems;
       updateDoc(doc(db, "users", user.user), {
-        allProducts: newItems.allProducts,
-        allAmount: increment(newItems.allAmount),
-        allQuantity: increment(newItems.allQuantity),
+        allProducts: allProducts,
+        allAmount: increment(allAmount),
+        allQuantity: increment(allQuantity),
       });
-    } catch (err: any) {
-      console.log(err);
+    } catch (error: unknown) {
+      console.log(error);
     }
   };
 

@@ -11,8 +11,8 @@ import Login from "./login/Login";
 import Personal from "./personal/Personal";
 import Basket from "./basket/Basket";
 import NotFound from "./notFound/NotFound";
-import Private from "./hooks/Private";
-import Public from "./hooks/Publuc";
+import Private from "./private&public/Private";
+import Public from "./private&public/Publuc";
 
 const App: React.FC = () => {
   return (
