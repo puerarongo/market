@@ -25,6 +25,7 @@ const Private: any = () => {
               })
             );
           }
+
           dispatch(userActions.setIsReady(true));
         })
         .catch((err: Error) => console.log(err));

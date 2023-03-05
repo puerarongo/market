@@ -30,7 +30,7 @@ const Basket: React.FC = () => {
         allQuantity: totalQuantity,
       };
       dispatch(basketActions.allDelete());
-      dispatch(personalActions.addBuy(newItems));
+      dispatch(personalActions.updateBuy(newItems));
 
       const { allProducts, allAmount, allQuantity } = newItems;
       updateDoc(doc(db, "users", user.user), {

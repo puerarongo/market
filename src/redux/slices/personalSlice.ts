@@ -12,8 +12,15 @@ const personalSlice = createSlice({
   reducers: {
     addBuy: (state, action) => {
       const { allQuantity, allAmount, allProducts } = action.payload;
-      state.allQuantity = state.allQuantity + allQuantity;
-      state.allAmount = state.allAmount + allAmount;
+      state.allQuantity = allQuantity;
+      state.allAmount = allAmount;
+      state.allProducts = allProducts;
+    },
+
+    updateBuy: (state, action) => {
+      const { allQuantity, allAmount, allProducts } = action.payload;
+      state.allQuantity += allQuantity;
+      state.allAmount += allAmount;
       state.allProducts = allProducts;
     },
 

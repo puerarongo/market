@@ -17,8 +17,6 @@ const Navigation: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state: any) => state.user.user);
-  console.log("navigate", user);
-
   const logOut = () => {
     signOut(auth)
       .then(() => navigate("/"))
