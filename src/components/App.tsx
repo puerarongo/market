@@ -21,6 +21,7 @@ const App: React.FC = () => {
         <Route path="/" element={<AppBar />}>
           <Route index element={<Shop />} />
           <Route path="/:productId" element={<ProductPage />} />
+
           <Route element={<Private />}>
             <Route path="/personal" element={<Personal />} />
             <Route path="/basket" element={<Basket />} />
