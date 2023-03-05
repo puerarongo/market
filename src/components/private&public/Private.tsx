@@ -1,11 +1,11 @@
 import { useEffect } from "react";
+import Loader from "../loader/Loader";
 import { Navigate, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import { personalActions } from "../../redux/slices/personalSlice";
 import { userActions } from "../../redux/slices/userSlice";
-//import IPersonalFirebase from "../../services/interface/personalFirebase.interface";
 
 const Private: any = () => {
   const { user, isReady } = useSelector((state: any) => state.user);
@@ -31,8 +31,7 @@ const Private: any = () => {
     }
   }, [isReady, user, dispatch]);
 
-  if (user) return isReady && <Outlet />;
+  if (user) return isReady ? <Outlet /> : <Loader />;
   else return <Navigate to="/login" replace />;
 };
-
 export default Private;

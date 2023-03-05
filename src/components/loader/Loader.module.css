@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  text-align: center;
+  padding: 200px 0;
+}
+
+.loader__container {
+  margin-right: auto;
+  margin-left: auto;
+}
