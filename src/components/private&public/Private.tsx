@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import { personalActions } from "../../redux/slices/personalSlice";
+import { userActions } from "../../redux/slices/userSlice";
+//import IPersonalFirebase from "../../services/interface/personalFirebase.interface";
 
 const Private: any = () => {
-  const [ready, setReady] = useState<boolean>(false);
-  const user = useSelector((state: any) => state.user.user);
+  const { user, isReady } = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("!!!!");
-    if (!ready && user) {
+    if (!isReady && user) {
       getDoc(doc(db, "users", user))
         .then((data) => {
           const { allProducts, allQuantity, allAmount }: any = data.data();
@@ -25,17 +25,14 @@ const Private: any = () => {
               })
             );
           }
-          setReady(true);
+          dispatch(userActions.setIsReady(true));
         })
         .catch((err: Error) => console.log(err));
     }
-  }, [ready, user, dispatch]);
+  }, [isReady, user, dispatch]);
 
-  if (user) {
-    return ready && <Outlet />;
-  } else {
-    return <Navigate to="/login" replace />;
-  }
+  if (user) return isReady && <Outlet />;
+  else return <Navigate to="/login" replace />;
 };
 
 export default Private;

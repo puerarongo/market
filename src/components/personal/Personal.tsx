@@ -9,14 +9,14 @@ const Personal: React.FC = () => {
   const { allQuantity, allAmount, allProducts } = useSelector(
     (state: any) => state.personal
   );
-  const user = useSelector((state: any) => state.user);
+  const { email, isReady } = useSelector((state: any) => state.user);
 
   return (
     <div className={styles.container}>
-      {allProducts ? (
+      {isReady ? (
         <>
           <h2 className={styles.personal__title}>
-            Hello {user.email}, this is your purchase history
+            Hello {email}, this is your purchase history
           </h2>
           <ul className={styles.personal__list}>
             {allProducts.length > 0 ? (

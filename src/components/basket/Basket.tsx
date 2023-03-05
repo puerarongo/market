@@ -8,6 +8,12 @@ import { personalActions } from "../../redux/slices/personalSlice";
 import { updateDoc, doc, increment } from "firebase/firestore";
 import { db } from "../firebase";
 import addBuyCheck from "../../services/addBuyCheck";
+import { Notify } from "notiflix";
+
+Notify.init({
+  position: "right-bottom",
+  timeout: 1500,
+});
 
 const Basket: React.FC = () => {
   const dispatch = useDispatch();
@@ -32,6 +38,8 @@ const Basket: React.FC = () => {
         allAmount: increment(allAmount),
         allQuantity: increment(allQuantity),
       });
+
+      Notify.info("You had made a purchase!");
     } catch (error: unknown) {
       console.log(error);
     }

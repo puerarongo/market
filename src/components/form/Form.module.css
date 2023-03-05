@@ -17,8 +17,27 @@
   color: rgb(49, 39, 39);
 }
 
-.input {
-  margin-top: 5px;
+.input,
+.input__errors {
+  outline: none;
+  margin-top: 6px;
+}
+
+.input__error {
+  border-color: red;
+}
+
+.default__count {
+  display: block;
+  height: 16px;
+  margin-top: 8px;
+}
+
+.error__count {
+  margin-left: 5px;
+  color: red;
+  font-size: 12px;
+  margin-top: 8px;
 }
 
 .label:not(:last-child) {

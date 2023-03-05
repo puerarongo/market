@@ -14,6 +14,11 @@ interface IShopItem {
   price: Number;
 }
 
+Notify.init({
+  position: "right-bottom",
+  timeout: 1500,
+});
+
 const ShopItem: React.FC<IShopItem> = ({
   id,
   image,
@@ -35,7 +40,7 @@ const ShopItem: React.FC<IShopItem> = ({
           price: price,
         })
       );
-      // Notify.success("Product added successfully");
+      Notify.success("Product added successfully");
     } else
       Notify.failure(
         "You must be logged in to your profile to add a product to your shopping cart."

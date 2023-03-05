@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { userActions } from "../../redux/slices/userSlice";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { personalActions } from "../../redux/slices/personalSlice";
+import { Report } from "notiflix/build/notiflix-report-aio";
 
 interface IFormAuth {
   firebaseFunc: Function;
@@ -76,7 +77,7 @@ const FormAuth: React.FC<IFormAuth> = ({
           password: "",
         }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
+        onSubmit={(values, { resetForm }) => {
           const { email, password } = values;
           firebaseFunc(auth, email, password)
             .then(async (userCredential: UserCredential) => {
@@ -100,9 +101,23 @@ const FormAuth: React.FC<IFormAuth> = ({
                 })
               );
             })
-            .catch((error: Error) => console.log(error.message));
-          values.email = "";
-          values.password = "";
+            .catch((error: Error) => {
+              resetForm();
+              if (formType === "registration") {
+                Report.failure(
+                  "Registration Error",
+                  "The user with this email is already registered",
+                  "OK"
+                );
+              } else {
+                Report.failure(
+                  "Login Error",
+                  "This user is not registered",
+                  "OK"
+                );
+              }
+            });
+          resetForm();
         }}
       >
         {({
@@ -142,7 +157,7 @@ const FormAuth: React.FC<IFormAuth> = ({
               <Form.Control
                 size="lg"
                 className={
-                  errors.email && touched.email
+                  errors.password && touched.password
                     ? styles.input__error
                     : styles.input
                 }
