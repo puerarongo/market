@@ -27,8 +27,8 @@ const BasketItem: React.FC<IBasketItem> = ({
         id: id,
       })
     );
-    console.log("PRODUCT WAS DELETED!");
   };
+
   return (
     <div className={styles.container}>
       <img
