@@ -24,15 +24,15 @@ const middleware = [
 ];
 
 const persistConfig = {
-  key: "rootPersist",
+  key: "rootUser",
   storage,
-  whitelist: ["user", "email", "basketItems", "totalAmount", "totalQuantity"],
+  whitelist: ["user", "email"],
 };
 
 export const store = configureStore({
   reducer: {
     data: dataReducer,
-    basket: persistReducer(persistConfig, basketSlice),
+    basket: basketSlice,
     personal: personalSlice,
     user: persistReducer(persistConfig, userSlice),
   },
