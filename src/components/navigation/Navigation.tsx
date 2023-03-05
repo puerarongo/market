@@ -28,15 +28,15 @@ const Navigation: React.FC = () => {
 
   return (
     <header className={styles.header}>
-      <div className={styles.nav__container}>
-        <NavLink className={styles.link} to="/">
-          Shop
-        </NavLink>
-      </div>
       <div className={styles.logo__container}>
         <svg className={styles.svg__logo}>
           <use href={svgPath.logo + "#logo"}></use>
         </svg>
+      </div>
+      <div className={styles.nav__container}>
+        <NavLink className={styles.link} to="/">
+          Shop
+        </NavLink>
       </div>
       {user ? (
         <div className={styles.nav__confirm}>

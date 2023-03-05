@@ -6,10 +6,21 @@
   padding: 30px 100px;
 }
 
+.logo__container {
+  margin-right: 50px;
+}
+
 .svg__logo {
   width: 50px;
   height: 50px;
   fill: #fff;
+
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.svg__logo:hover {
+  transform: scale(1.2);
 }
 
 .nav__container {

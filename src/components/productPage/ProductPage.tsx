@@ -66,8 +66,8 @@ const ProductPage: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className={styles.container}>
-          <h2>This product does not exist</h2>
+        <div className={styles.empty__container}>
+          <h2 className={styles.empty__title}>This product does not exist</h2>
         </div>
       )}
     </>

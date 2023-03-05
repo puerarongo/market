@@ -35,3 +35,15 @@
   font-weight: 500;
   margin-bottom: 15px;
 }
+
+.empty__container {
+  padding: 200px 0;
+  text-align: center;
+}
+
+.empty__title {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 22px;
+  color: rgb(49, 39, 39);
+}

@@ -59,7 +59,7 @@ const ShopItem: React.FC<IShopItem> = ({
         <p className={styles.price}>{`Price: $ ${price}`}</p>
         <div className={styles.media}>
           <Button type="button" className={styles.detal__button}>
-            <Link to={`${id}`} className={styles.detail__link}>
+            <Link to={`/detail/${id}`} className={styles.detail__link}>
               Detail
             </Link>
           </Button>
