@@ -5,7 +5,7 @@ import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
 // *
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { store, persistor } from "./redux/store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -17,14 +17,14 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter basename="market">
+        <HashRouter>
           <ThemeProvider
             breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
             minBreakpoint="xxs"
           >
             <App />
           </ThemeProvider>
-        </BrowserRouter>
+        </HashRouter>
       </PersistGate>
     </Provider>
   </React.StrictMode>
