@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmarket=self.webpackChunkmarket||[]).push([[316],{7316:function(e,n,t){t.r(n),t.d(n,{default:function(){return o}});t(2791);var r="NotFound_container__n0Bo4",s="NotFound_title__WU4Fl",a=t(184),o=function(){return(0,a.jsx)("div",{className:r,children:(0,a.jsx)("h2",{className:s,children:"Error 404. Page does not exist"})})}}}]);
+//# sourceMappingURL=316.32825bf3.chunk.js.map
