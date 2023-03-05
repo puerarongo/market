@@ -24,12 +24,18 @@
   margin: auto auto auto 0;
 }
 
+.into {
+  display: flex;
+  margin-left: auto;
+  width: 600px;
+}
+
 .quantity {
-  margin: auto 0;
+  margin: auto auto auto 0;
 }
 
 .price {
-  margin: auto 0 auto 200px;
+  margin: auto 100px auto auto;
 }
 
 .price,

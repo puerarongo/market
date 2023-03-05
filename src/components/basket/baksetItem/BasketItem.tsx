@@ -38,6 +38,7 @@ const BasketItem: React.FC<IBasketItem> = ({
       />
 
       <h3 className={styles.title}>{title}</h3>
+      <div className={styles.into}>
       <p className={styles.quantity}>{`${quantity} pcs`}</p>
       <p className={styles.price}>{`$ ${price}`}</p>
       <Button
@@ -48,6 +49,7 @@ const BasketItem: React.FC<IBasketItem> = ({
       >
         Delete
       </Button>
+      </div>
     </div>
   );
 };

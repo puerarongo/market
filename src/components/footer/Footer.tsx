@@ -4,12 +4,15 @@ import styles from "./Footer.module.css";
 const Footer: React.FC = () => {
   return (
     <footer className={styles.footer}>
-      <p className={styles.footer__description}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
-        cupiditate excepturi voluptatibus facilis, accusantium, non nisi
-        incidunt officia dolorum voluptate consequatur tenetur molestias eveniet
-        quo facere, provident atque consequuntur exercitationem.
-      </p>
+      <div className={styles.footer__into}>
+        <h3 className={styles.footer__title}>Information</h3>
+        <p className={styles.footer__description}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
+          cupiditate excepturi voluptatibus facilis, accusantium, non nisi
+          incidunt officia dolorum voluptate consequatur tenetur molestias
+          eveniet quo facere, provident atque consequuntur exercitationem.
+        </p>
+      </div>
       <ul className={styles.list}>
         <li className={styles.item}>
           <p className={styles.label}>Email:</p>
