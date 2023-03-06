@@ -6,6 +6,7 @@ import { getData } from "../../redux/operation/data-operation";
 import { useSelector, useDispatch } from "react-redux";
 import { basketActions } from "../../redux/slices/basketSlice";
 import { Notify } from "notiflix/build/notiflix-notify-aio";
+import defaultImg from "../../services/defaultPicture";
 
 const ProductPage: React.FC = () => {
   const [detail, setDetail] = useState<any>("");
@@ -52,7 +53,11 @@ const ProductPage: React.FC = () => {
           <div className={styles.img__container}>
             <img
               className={styles.image}
-              src={`https://image.tmdb.org/t/p/w500${detail.poster_path}`}
+              src={
+                detail.poster_path
+                  ? `https://image.tmdb.org/t/p/w500${detail.poster_path}`
+                  : defaultImg
+              }
               alt={`${detail.id}`}
             />
           </div>
