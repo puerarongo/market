@@ -18,10 +18,7 @@ Notify.init({
 const Basket: React.FC = () => {
   const dispatch = useDispatch();
   const items = useSelector((state: any) => state.basket);
-  // const personal = useSelector((state: any) => state.personal);
   const user = useSelector((state: any) => state.user);
-
-  console.log("Items", items);
 
   const someFunction = () => {
     try {

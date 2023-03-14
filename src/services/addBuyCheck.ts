@@ -19,7 +19,7 @@ const addBuyCheck = (productItems: any) => {
         id: el.id,
         image: el.image,
         title: el.title,
-        description: el.description,
+        description: el.description || "someText",
         quantity: el.quantity,
         totalPrice: el.totalPrice,
       });

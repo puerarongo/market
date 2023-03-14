@@ -1,32 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styles from "./ProductPage.module.css";
 import { Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { getData } from "../../redux/operation/data-operation";
+import { getOneItem } from "../../redux/operation/data-operation";
 import { useSelector, useDispatch } from "react-redux";
 import { basketActions } from "../../redux/slices/basketSlice";
 import { Notify } from "notiflix/build/notiflix-notify-aio";
 import defaultImg from "../../services/defaultPicture";
 
 const ProductPage: React.FC = () => {
-  const [detail, setDetail] = useState<any>("");
   const dispatch = useDispatch();
-  const page = useSelector((state: any) => state.data);
+  const detail = useSelector((state: any) => state.data);
   const user = useSelector((state: any) => state.user.user);
   const id: String | undefined = useParams().productId;
 
   useEffect(() => {
-    dispatch(getData());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (page.products) {
-      const data = page.products.find((el: any) => {
-        return el.id === Number(id);
-      });
-      setDetail(data);
-    }
-  }, [page.products, id]);
+    dispatch(getOneItem(id));
+  }, [dispatch, id]);
 
   const addToBasket = () => {
     if (user) {

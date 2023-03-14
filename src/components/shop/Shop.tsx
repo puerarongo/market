@@ -4,28 +4,44 @@ import { useSelector, useDispatch } from "react-redux";
 import { getData } from "../../redux/operation/data-operation";
 import ShopItem from "./shopItem/ShopItem";
 import { Form } from "react-bootstrap";
+
+// ? Component
 import Loader from "../loader/Loader";
+import ShopPagination from "./shopPagination/ShopPagination";
 
 const Shop: React.FC = () => {
   const dispatch = useDispatch();
-  let data = useSelector((state: any) => state.data.products);
-  const [sorted, setSorted] = useState<{}[]>(data);
+  let { total, products } = useSelector((state: any) => state.data);
+  const [sorted, setSorted] = useState<{}[]>(products);
+
+  // *
+  const [pageCount, setPageCount] = useState(0);
+  const [postOffSet, setPostOffSet] = useState(0);
+  const postPerPage = 12;
 
   useEffect(() => {
-    dispatch(getData());
-  }, [dispatch]);
+    dispatch(getData(postOffSet));
+    setPageCount(Math.ceil(total / postPerPage) % total);
+  }, [dispatch, postOffSet, total]);
 
   useEffect(() => {
-    setSorted(data);
-  }, [data]);
+    setSorted(products);
+  }, [products]);
+
+  //*
+  const handlePageClick = (event: any) => {
+    const newOffSet = (event.selected * postPerPage) % total;
+    setPostOffSet(newOffSet);
+  };
+  // *
 
   const selectHandler = (e: any) => {
     let newSort: {}[];
     if (e.target.value === "large")
-      newSort = [...data].sort((a: any, b: any) => b.price - a.price);
+      newSort = [...products].sort((a: any, b: any) => b.price - a.price);
     else if (e.target.value === "smallest")
-      newSort = [...data].sort((a: any, b: any) => a.price - b.price);
-    else newSort = data;
+      newSort = [...products].sort((a: any, b: any) => a.price - b.price);
+    else newSort = products;
     setSorted(newSort);
   };
 
@@ -45,21 +61,24 @@ const Shop: React.FC = () => {
       </div>
 
       {sorted ? (
-        <ul className={styles.list__grid}>
-          {sorted.map(({ id, title, price, thumbnail, description }: any) => {
-            return (
-              <li className={styles.item} key={id}>
-                <ShopItem
-                  id={id}
-                  image={thumbnail}
-                  title={title}
-                  description={description}
-                  price={price}
-                />
-              </li>
-            );
-          })}
-        </ul>
+        <>
+          <ul className={styles.list__grid}>
+            {sorted.map(({ id, title, price, thumbnail, description }: any) => {
+              return (
+                <li className={styles.item} key={id}>
+                  <ShopItem
+                    id={id}
+                    image={thumbnail}
+                    title={title}
+                    description={description}
+                    price={price}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+          <ShopPagination handleFunc={handlePageClick} pageCount={pageCount} />
+        </>
       ) : (
         <div className={styles.nothing__container}>
           <Loader />
