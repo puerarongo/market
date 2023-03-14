@@ -11,11 +11,7 @@ const PersonalItem: React.FC<IProductsFirebase> = ({
 }) => {
   return (
     <div className={styles.container}>
-      <img
-        className={styles.img}
-        src={`https://image.tmdb.org/t/p/w300${image}`}
-        alt={`${id}`}
-      />
+      <img className={styles.img} src={`${image}`} alt={`${id}`} />
 
       <h3 className={styles.title}>{title}</h3>
       <div className={styles.into}>

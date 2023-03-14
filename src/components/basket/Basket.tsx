@@ -21,6 +21,8 @@ const Basket: React.FC = () => {
   // const personal = useSelector((state: any) => state.personal);
   const user = useSelector((state: any) => state.user);
 
+  console.log("Items", items);
+
   const someFunction = () => {
     try {
       const { basketItems, totalAmount, totalQuantity } = items;
@@ -33,6 +35,7 @@ const Basket: React.FC = () => {
       dispatch(personalActions.updateBuy(newItems));
 
       const { allProducts, allAmount, allQuantity } = newItems;
+      console.log("allProducts", allProducts);
       updateDoc(doc(db, "users", user.user), {
         allProducts: allProducts,
         allAmount: increment(allAmount),

@@ -7,7 +7,7 @@ import { Form } from "react-bootstrap";
 
 const Shop: React.FC = () => {
   const dispatch = useDispatch();
-  let data = useSelector((state: any) => state.data.results);
+  let data = useSelector((state: any) => state.data.products);
   const [sorted, setSorted] = useState<{}[]>(data);
 
   useEffect(() => {
@@ -21,9 +21,9 @@ const Shop: React.FC = () => {
   const selectHandler = (e: any) => {
     let newSort: {}[];
     if (e.target.value === "large")
-      newSort = [...data].sort((a: any, b: any) => b.vote_count - a.vote_count);
+      newSort = [...data].sort((a: any, b: any) => b.price - a.price);
     else if (e.target.value === "smallest")
-      newSort = [...data].sort((a: any, b: any) => a.vote_count - b.vote_count);
+      newSort = [...data].sort((a: any, b: any) => a.price - b.price);
     else newSort = data;
     setSorted(newSort);
   };
@@ -44,21 +44,19 @@ const Shop: React.FC = () => {
       </div>
       <ul className={styles.list__grid}>
         {sorted ? (
-          sorted.map(
-            ({ id, title, vote_count, poster_path, overview }: any) => {
-              return (
-                <li className={styles.item} key={id}>
-                  <ShopItem
-                    id={id}
-                    image={poster_path}
-                    title={title}
-                    overview={overview}
-                    price={vote_count}
-                  />
-                </li>
-              );
-            }
-          )
+          sorted.map(({ id, title, price, thumbnail, description }: any) => {
+            return (
+              <li className={styles.item} key={id}>
+                <ShopItem
+                  id={id}
+                  image={thumbnail}
+                  title={title}
+                  description={description}
+                  price={price}
+                />
+              </li>
+            );
+          })
         ) : (
           <li>
             <h2>Nothing</h2>

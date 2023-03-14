@@ -4,7 +4,7 @@ interface IProduct {
   id: Number;
   image: String;
   title: String;
-  overview: String;
+  description: String;
   price: Number;
   quantity: Number;
   totalPrice: Number;
@@ -32,7 +32,7 @@ const basketSlice = createSlice({
           id: newProduct.id,
           image: newProduct.image,
           title: newProduct.title,
-          overview: newProduct.overview,
+          description: newProduct.description,
           price: newProduct.price,
           quantity: 1,
           totalPrice: newProduct.price,
@@ -54,7 +54,6 @@ const basketSlice = createSlice({
       });
 
       if (existingProduct) {
-        console.log("existing into", state.basketItems);
         state.basketItems = state.basketItems.filter((el: any) => el.id !== id);
         state.totalQuantity = state.totalQuantity - existingProduct.quantity;
       }

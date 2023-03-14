@@ -33,7 +33,7 @@ const BasketItem: React.FC<IBasketItem> = ({
     <div className={styles.container}>
       <img
         className={styles.img}
-        src={`https://image.tmdb.org/t/p/w300${image}`}
+        src={`${image}`}
         alt={`${id}`}
       />
 

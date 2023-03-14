@@ -10,7 +10,7 @@ interface IShopItem {
   id: Number;
   image: String;
   title: String;
-  overview: String;
+  description: String;
   price: Number;
 }
 
@@ -23,7 +23,7 @@ const ShopItem: React.FC<IShopItem> = ({
   id,
   image,
   title,
-  overview,
+  description,
   price,
 }) => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const ShopItem: React.FC<IShopItem> = ({
           id: id,
           image: image,
           title: title,
-          overview: overview,
+          description: description,
           price: price,
         })
       );
@@ -49,11 +49,7 @@ const ShopItem: React.FC<IShopItem> = ({
 
   return (
     <div className={styles.container}>
-      <img
-        className={styles.image}
-        src={`https://image.tmdb.org/t/p/w300${image}`}
-        alt={`${id}`}
-      />
+      <img className={styles.image} src={`${image}`} alt={`${id}`} />
       <div className={styles.detail}>
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.price}>{`Price: $ ${price}`}</p>

@@ -20,23 +20,23 @@ const ProductPage: React.FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (page.results) {
-      const data = page.results.find((el: any) => {
+    if (page.products) {
+      const data = page.products.find((el: any) => {
         return el.id === Number(id);
       });
       setDetail(data);
     }
-  }, [page.results, id]);
+  }, [page.products, id]);
 
   const addToBasket = () => {
     if (user) {
       dispatch(
         basketActions.addProduct({
           id: detail.id,
-          image: detail.poster_path,
+          image: detail.thumbnail,
           title: detail.title,
-          overview: detail.overview,
-          price: detail.vote_count,
+          overview: detail.description,
+          price: detail.price,
         })
       );
       Notify.success("Product added successfully");
@@ -53,18 +53,14 @@ const ProductPage: React.FC = () => {
           <div className={styles.img__container}>
             <img
               className={styles.image}
-              src={
-                detail.poster_path
-                  ? `https://image.tmdb.org/t/p/w500${detail.poster_path}`
-                  : defaultImg
-              }
+              src={detail.thumbnail ? `${detail.thumbnail}` : defaultImg}
               alt={`${detail.id}`}
             />
           </div>
           <div className={styles.description__container}>
             <h2 className={styles.title}>{detail.title}</h2>
-            <p className={styles.description}>{detail.overview}</p>
-            <p className={styles.price}>Price: $ {detail.vote_count}</p>
+            <p className={styles.description}>{detail.description}</p>
+            <p className={styles.price}>Price: $ {detail.price}</p>
             <Button variant="success" type="button" onClick={addToBasket}>
               Add to basket
             </Button>
