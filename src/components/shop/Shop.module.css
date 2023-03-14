@@ -27,3 +27,7 @@
   grid-gap: 18px;
   gap: 18px;
 }
+
+.nothing__container {
+  margin: 0 auto;
+}

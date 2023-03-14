@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getData } from "../../redux/operation/data-operation";
 import ShopItem from "./shopItem/ShopItem";
 import { Form } from "react-bootstrap";
+import Loader from "../loader/Loader";
 
 const Shop: React.FC = () => {
   const dispatch = useDispatch();
@@ -42,9 +43,10 @@ const Shop: React.FC = () => {
           <option value="smallest">Sort from smallest</option>
         </Form.Select>
       </div>
-      <ul className={styles.list__grid}>
-        {sorted ? (
-          sorted.map(({ id, title, price, thumbnail, description }: any) => {
+
+      {sorted ? (
+        <ul className={styles.list__grid}>
+          {sorted.map(({ id, title, price, thumbnail, description }: any) => {
             return (
               <li className={styles.item} key={id}>
                 <ShopItem
@@ -56,13 +58,13 @@ const Shop: React.FC = () => {
                 />
               </li>
             );
-          })
-        ) : (
-          <li>
-            <h2>Nothing</h2>
-          </li>
-        )}
-      </ul>
+          })}
+        </ul>
+      ) : (
+        <div className={styles.nothing__container}>
+          <Loader />
+        </div>
+      )}
     </div>
   );
 };
