@@ -100,6 +100,23 @@ const FormAuth: React.FC<IFormAuth> = ({
                   email: userCredential.user.email,
                 })
               );
+
+              getDoc(doc(db, "users", userCredential.user.uid))
+                .then((data) => {
+                  const { allProducts, allQuantity, allAmount }: any =
+                    data.data();
+                  if (allProducts) {
+                    dispatch(
+                      personalActions.addBuy({
+                        allProducts,
+                        allQuantity,
+                        allAmount,
+                      })
+                    );
+                  }
+                  dispatch(userActions.setIsReady(true));
+                })
+                .catch((err: Error) => console.log(err));
             })
             .catch((error: Error) => {
               resetForm();

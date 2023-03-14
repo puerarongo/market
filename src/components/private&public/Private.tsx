@@ -16,7 +16,6 @@ const Private: any = () => {
       getDoc(doc(db, "users", user))
         .then((data) => {
           const { allProducts, allQuantity, allAmount }: any = data.data();
-          console.log("ALL", allProducts, user);
           if (allProducts) {
             dispatch(
               personalActions.addBuy({
@@ -26,7 +25,6 @@ const Private: any = () => {
               })
             );
           }
-
           dispatch(userActions.setIsReady(true));
         })
         .catch((err: Error) => console.log(err));

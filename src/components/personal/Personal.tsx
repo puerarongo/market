@@ -9,6 +9,7 @@ const Personal: React.FC = () => {
   const { allQuantity, allAmount, allProducts } = useSelector(
     (state: any) => state.personal
   );
+
   const { email, isReady } = useSelector((state: any) => state.user);
 
   return (
